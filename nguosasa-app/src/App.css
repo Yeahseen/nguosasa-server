@@ -73,7 +73,7 @@
   width: 100%;
   height: 280px;
   object-fit: cover;
-  background: url('./no-poster.jpg') 0px 0px no-repeat;
+  background: url('./images/men\ tshirt\ wholesale.jpg') 0px 0px no-repeat;
 }
 
 .mvls-movie-body {
@@ -108,6 +108,14 @@
   background-color: #4299e1;
 }
 
+.mvls-btn-retail {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border-radius: 0.25rem;
+  background-color: #13222e;
+}
+
 .mvls-btn.mvls-btn-cinemas {
   padding: 0.5rem 3.5rem;
   text-decoration: none;
@@ -134,4 +142,86 @@
   .mvls-fullpage-text > p {
     font-size: 1.875rem;
   }
+}
+
+/* detailspage */
+.mvls-movie-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mvls-movie-details {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  margin: 15px;
+  width: 280px;
+}
+
+@media (min-width: 720px) {
+  .mvls-movie-details-wrapper {
+    padding: 0.5rem 1rem;
+  }
+
+  .mvls-movie-details {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+.mvls-movie-details .mvls-movie-details-poster {
+  display: flex;
+  align-self: center;
+  min-width: 280px;
+  max-width: 280px;
+  height: 280px;
+  object-fit: cover;
+  background: url('./no-poster.jpg') 0px 0px no-repeat;
+}
+
+.mvls-movie-details-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+.mvls-movie-details-info h2 {
+  margin: 8px 0;
+}
+
+.mvls-movie-details-info p {
+  margin: 4px 0;
+}
+
+.mvls-movie-details-info p span {
+  font-weight: bold;
+}
+
+.mvls-movie-cinemas {
+  padding: 0.5rem 1rem;
+}
+
+.mvls-movie-cinema {
+  border-radius: 0.25rem;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.mvls-movie-cinema p:last-child {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.mvls-movie-cinema p span {
+  border: 1px solid #777;
+  border-radius: 1rem;
+  background-color: #ddd;
+  padding: 5px 10px;
+  margin: 5px 10px 5px 0;
+  white-space: nowrap;
 }

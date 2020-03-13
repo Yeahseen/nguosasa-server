@@ -1,9 +1,13 @@
 import React from 'react';
+import { Router } from '@reach/router';
 import NavBar from './NavBar';
-import MovieList from './MovieList';
+import ProductList from './ProductList';
+import ProductDetails from './ProductDetails';
+import Cart from './Cart';
+import Signup from './Login';
+import Admin from './Admin';
 import './App.css';
-
-// This is static hard-coded data, we shall later fetch it from our server
+import Login from './Signup';
 
 function App() {
   return (
@@ -12,7 +16,14 @@ function App() {
         <NavBar />
       </header>
       <main className="mvls-main">
-        <MovieList />
+        <Router>
+          <ProductList path="/" />
+          <ProductDetails path="/product/:productId" />
+          <Login path="/Login" />
+          <Signup path="/Signup" />
+          <Cart path="/Cart" />
+          <Admin path="/Admin" />
+        </Router>
       </main>
     </div>
   );

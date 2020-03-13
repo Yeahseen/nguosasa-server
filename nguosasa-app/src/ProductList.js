@@ -1,10 +1,10 @@
 import React from 'react';
-import Movie from './Movie';
 import axios from 'axios';
 import Loading from './Loading';
 import Error from './Error';
+import Product from './Product';
 
-class MovieList extends React.Component {
+class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class MovieList extends React.Component {
     this.setState({ loading: true, error: false });
 
     axios
-      .get('/api/moviesShowing')
+      .get('/api/products')
       .then(response => {
         this.setState({
           moviesShowing: response.data,
@@ -54,7 +54,7 @@ class MovieList extends React.Component {
       <div className="mvls-container">
         <div className="mvls-movie-list">
           {moviesShowing.map(m => (
-            <Movie key={m.id} movieShowing={m} />
+            <Product key={m.id} movieShowing={m} />
           ))}
         </div>
       </div>
@@ -62,4 +62,4 @@ class MovieList extends React.Component {
   }
 }
 
-export default MovieList;
+export default ProductList;
