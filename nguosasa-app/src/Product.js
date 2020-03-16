@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from '@reach/router';
 import './App.css';
 
-function Product({ movieShowing }) {
-  const { id, name, price, description, poster, type } = movieShowing;
+function Product({ productDisplay }) {
+  const { id, name, price, description, poster, type } = productDisplay;
   let typeIs = '';
 
   if (type === 'Retail') {
@@ -21,7 +21,7 @@ function Product({ movieShowing }) {
           <div className="mvls-title">{description}</div>
         </div>
         <div className="mvls-movie-footer">
-          <Link to={`/ProductDetails`} className="mvls-btn-retail">
+          <Link to={'/ProductDetails'} className="mvls-btn-retail">
             see {name}
           </Link>
         </div>

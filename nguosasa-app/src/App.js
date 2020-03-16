@@ -4,10 +4,12 @@ import NavBar from './NavBar';
 import ProductList from './ProductList';
 import ProductDetails from './ProductDetails';
 import Cart from './Cart';
-import Signup from './Login';
+import Signup from './Signup';
 import Admin from './Admin';
+import Adminlogin from './Adminlogin';
 import './App.css';
-import Login from './Signup';
+import Login from './Login';
+import Login2 from './Login2';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <ProductList path="/" />
           <ProductDetails path="/product/:productId" />
           <Login path="/Login" />
+          <Login2 path="/Login2" />
+          <Adminlogin path="/Adminlogin" />
           <Signup path="/Signup" />
           <Cart path="/Cart" />
           <Admin path="/Admin" />

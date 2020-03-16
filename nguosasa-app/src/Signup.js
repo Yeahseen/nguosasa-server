@@ -3,118 +3,63 @@ import React from 'react';
 function Signup() {
   return (
     <div className="mvls-container">
-      <form
-        action="index.php"
-        method="post"
-        id="form"
-        onsubmit="return validate_all('results');"
-      >
-        <table cellspacing="10">
-          <tr>
-            <td>Full Name</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="fullname"
-                maxlength="25"
-                id="fullname"
-                onKeyUp="updatelength('fullname', 'fullname_length')"
-              />
-              <br />
-              <div id="fullname_length"></div>
-            </td>
-          </tr>
+      <div className="login-form">
+        <h1>Please Sign up in the form below</h1>
+        <form action="auth" method="POST">
+          <input
+            type="text"
+            name="Fullname"
+            placeholder="Fullname"
+            maxlenth="25"
+            required
+          ></input>
+          <input
+            type="text"
+            name="Username"
+            placeholder="Username"
+            maxlenth="8"
+            required
+          ></input>
+          <input
+            type="Password"
+            name="Password"
+            placeholder="Password"
+            minlenth="8"
+            required
+          ></input>
+          <input
+            type="Password"
+            name="Cpassword"
+            placeholder="Confirm Password"
+            minlenth="8"
+            required
+          ></input>
+          <input
+            type="address"
+            name="Address"
+            placeholder="Address"
+            maxlenth="50"
+            required
+          ></input>
 
-          <tr>
-            <td>Username</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="usename"
-                maxlength="10"
-                id="usename"
-                onKeyUp="updatelength('usename', 'usename_length')"
-              />
-              <br />
-              <div id="usename_length"></div>
-            </td>
-          </tr>
+          <input
+            type="number"
+            name="Telephone"
+            placeholder="Telephone"
+            maxlenth="15"
+            required
+          ></input>
 
-          <tr>
-            <td>Password</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="password"
-                name="pass"
-                maxlength="25"
-                id="password"
-                onKeyUp="updatelength('password', 'pass_length')"
-              />
-              <div id="pass_result"></div>
-              <br />
-              <div id="pass_length"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Confirm Password</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="password"
-                name="cpass"
-                maxlength="25"
-                id="c_password"
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>Telephone</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="phone"
-                maxlength="14"
-                id="phone"
-                onkeyup="updatelength('phone', 'phone_length')"
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>Email</td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="email"
-                maxlength="50"
-                id="email"
-                onKeyUp="updatelength('email', 'email_length')"
-              />
-              <br />
-              <div id="email_length"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td colspan="2">
-              <input type="submit" name="submit" value="Register" />
-            </td>
-          </tr>
-        </table>
-      </form>
+          <input
+            type="text"
+            name="Email"
+            placeholder="Email"
+            maxlenth="50"
+            required
+          ></input>
+          <input type="submit"></input>
+        </form>
+      </div>
     </div>
   );
 }

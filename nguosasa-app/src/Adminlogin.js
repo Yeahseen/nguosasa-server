@@ -5,6 +5,7 @@ function Login() {
     <div className="mvls-container">
       <div className="login-form">
         <h1> Login Form</h1>
+        <p>login as Admin</p>
         <form action="auth" method="POST">
           <input
             type="text"

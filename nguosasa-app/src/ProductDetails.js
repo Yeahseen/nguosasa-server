@@ -7,42 +7,36 @@ class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productDetails: [],
+      movieShowing: [],
       loading: false,
       error: false,
     };
   }
 
   componentDidMount() {
-    this.fetchProductDetails();
+    this.fetchMovieShowing();
   }
 
-  fetchProductDetails() {
+  fetchMovieShowing() {
     this.setState({ loading: true, error: false });
 
-    const { productId } = this.props;
-    const productDetailsPromise = axios.get(`/api/products/${productId}`);
-
     axios
-      .all([productDetailsPromise])
-      .then(
-        axios.spread(productDetailsResponse => {
-          this.setState({
-            productDetails: productDetailsResponse.data,
-            loading: false,
-            error: false,
-          });
-        })
-      )
+      .get('/api/product/:id')
+      .then(response => {
+        this.setState({
+          movieShowing: response.data,
+          loading: false,
+          error: false,
+        });
+      })
       .catch(error => {
         this.setState({
-          productDetails: [],
+          movieShowing: [],
           loading: false,
           error: true,
         });
       });
   }
-
   render() {
     const { productDetails, loading, error } = this.state;
 

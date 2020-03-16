@@ -54,7 +54,7 @@ class ProductList extends React.Component {
       <div className="mvls-container">
         <div className="mvls-movie-list">
           {moviesShowing.map(m => (
-            <Product key={m.id} movieShowing={m} />
+            <Product key={m.id} productDisplay={m} />
           ))}
         </div>
       </div>
