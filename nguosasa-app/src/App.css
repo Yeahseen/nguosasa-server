@@ -53,14 +53,14 @@
   padding-top: 51px;
 }
 
-.mvls-movie-list {
+.mvls-product-list {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.mvls-movie {
+.mvls-product {
   display: flex;
   flex-direction: column;
   border-radius: 0.25rem;
@@ -69,19 +69,19 @@
   width: 280px;
 }
 
-.mvls-movie .mvls-poster {
+.mvls-product .mvls-poster {
   width: 100%;
   height: 280px;
   object-fit: cover;
   background: url(no-poster.jpg) 0px 0px no-repeat;
 }
 
-.mvls-movie-body {
+.mvls-product-body {
   padding: 1rem 1.5rem;
   text-align: center;
 }
 
-.mvls-movie .mvls-title {
+.mvls-product .mvls-title {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
@@ -90,12 +90,12 @@
   overflow: hidden;
 }
 
-.mvls-movie .mvls-cinema-count {
+.mvls-product .mvls-cinema-count {
   font-size: 1rem;
   color: #4a5568;
 }
 
-.mvls-movie-footer {
+.mvls-product-footer {
   padding: 15px 15px 30px;
   text-align: center;
 }
@@ -145,13 +145,13 @@
 }
 
 /* detailspage */
-.mvls-movie-details-wrapper {
+.mvls-product-details-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.mvls-movie-details {
+.mvls-product-details {
   display: flex;
   flex-direction: column;
   border-radius: 0.25rem;
@@ -161,17 +161,17 @@
 }
 
 @media (min-width: 720px) {
-  .mvls-movie-details-wrapper {
+  .mvls-product-details-wrapper {
     padding: 0.5rem 1rem;
   }
 
-  .mvls-movie-details {
+  .mvls-product-details {
     flex-direction: row;
     width: 100%;
   }
 }
 
-.mvls-movie-details .mvls-movie-details-poster {
+.mvls-product-details .mvls-product-details-poster {
   display: flex;
   align-self: center;
   min-width: 280px;
@@ -181,43 +181,43 @@
   background: url('./no-poster.jpg') 0px 0px no-repeat;
 }
 
-.mvls-movie-details-info {
+.mvls-product-details-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem 1.5rem;
 }
 
-.mvls-movie-details-info h2 {
+.mvls-product-details-info h2 {
   margin: 8px 0;
 }
 
-.mvls-movie-details-info p {
+.mvls-product-details-info p {
   margin: 4px 0;
 }
 
-.mvls-movie-details-info p span {
+.mvls-product-details-info p span {
   font-weight: bold;
 }
 
-.mvls-movie-cinemas {
+.mvls-product-cinemas {
   padding: 0.5rem 1rem;
 }
 
-.mvls-movie-cinema {
+.mvls-product-cinema {
   border-radius: 0.25rem;
   background-color: #fff;
   padding: 15px;
   margin-bottom: 15px;
 }
 
-.mvls-movie-cinema p:last-child {
+.mvls-product-cinema p:last-child {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.mvls-movie-cinema p span {
+.mvls-product-cinema p span {
   border: 1px solid #777;
   border-radius: 1rem;
   background-color: #ddd;
@@ -262,3 +262,4 @@
 pl {
   color: #cc2a2a;
 }
+/*cart css*/

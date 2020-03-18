@@ -25,7 +25,7 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/:id', (req, res) => {
   pool.query(
-    'SELECT id, name, price, poster, description FROM products WHERE id = ?',
+    'SELECT id, name, price, poster, description, type FROM products WHERE id = ?',
     [req.params.id],
     (error, rows) => {
       if (error) {
@@ -86,11 +86,11 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', function(request, response) {
+app.get('/AdminLogin', function(request, response) {
   response.sendFile(path.join(__dirname + '/Adminlogin'));
 });
 
-app.post('/auth', function(request, response) {
+app.post('/authAdmin', function(request, response) {
   var adminusername = request.body.adminusername;
   var adminpassword = request.body.adminpassword;
   if (adminusername && adminpassword) {

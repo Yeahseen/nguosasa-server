@@ -6,7 +6,7 @@ function Login() {
       <div className="login-form">
         <h1> Login Form</h1>
         <p>login as Admin</p>
-        <form action="auth" method="POST">
+        <form action="authAdmin" method="POST">
           <input
             type="text"
             name="username"

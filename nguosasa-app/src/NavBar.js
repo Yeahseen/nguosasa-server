@@ -12,7 +12,6 @@ function NavBar() {
           <Link to="/Cart">Cart</Link>
           <Link to="/Signup">Sign Up</Link>
           <Link to="/Adminlogin">Admin</Link>
-          <Link to="/test">test</Link>
         </span>
       </nav>
     </div>

@@ -8,31 +8,31 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      moviesShowing: [],
+      productsDisplay: [],
       loading: false,
       error: false,
     };
   }
 
   componentDidMount() {
-    this.fetchMoviesShowing();
+    this.fetchProductsDisplay();
   }
 
-  fetchMoviesShowing() {
+  fetchProductsDisplay() {
     this.setState({ loading: true, error: false });
 
     axios
       .get('/api/products')
       .then(response => {
         this.setState({
-          moviesShowing: response.data,
+          productsDisplay: response.data,
           loading: false,
           error: false,
         });
       })
       .catch(error => {
         this.setState({
-          moviesShowing: [],
+          productsDisplay: [],
           loading: false,
           error: true,
         });
@@ -40,7 +40,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { moviesShowing, loading, error } = this.state;
+    const { productsDisplay, loading, error } = this.state;
 
     if (loading) {
       return <Loading />;
@@ -52,9 +52,9 @@ class ProductList extends React.Component {
 
     return (
       <div className="mvls-container">
-        <div className="mvls-movie-list">
-          {moviesShowing.map(m => (
-            <Product key={m.id} productDisplay={m} />
+        <div className="mvls-product-list">
+          {productsDisplay.map(p => (
+            <Product key={p.id} productDisplay={p} />
           ))}
         </div>
       </div>
