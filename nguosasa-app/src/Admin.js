@@ -1,9 +1,10 @@
 import React from 'react';
+import ProductAdmin from './ProductAdmin';
 
 function Admin() {
   return (
-    <div className="mvls-fullpage-text">
-      <p>Will be Admin page</p>
+    <div className="mvls-container">
+      <ProductAdmin />
     </div>
   );
 }

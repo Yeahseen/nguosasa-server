@@ -18,7 +18,6 @@ function Product({ productDisplay }) {
         <div className="mvls-product-body">
           <div className="mvls-title">{name}</div>
           <div className="mvls-title">Ksh {price}</div>
-          <div className="mvls-title">{description}</div>
         </div>
         <div className="mvls-product-footer">
           <Link to={`product/${id}`} className="mvls-btn-retail">
@@ -41,7 +40,7 @@ function Product({ productDisplay }) {
       <div className="mvls-product-body">
         <div className="mvls-title">{name}</div>
         <div className="mvls-title">Ksh {price}</div>
-        <div className="mvls-title">{description}</div>
+
         <p className="mvls-cinema-count">{typeIs}</p>
       </div>
       <div className="mvls-product-footer">

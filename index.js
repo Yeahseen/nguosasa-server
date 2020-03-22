@@ -13,7 +13,7 @@ const pool = mysql.createPool({
 
 app.get('/api/products', (req, res) => {
   pool.query(
-    'SELECT id, name, price, type, poster FROM products',
+    'SELECT id, name, price, type, poster, description, sellers_id FROM products',
     (error, rows) => {
       if (error) {
         return res.status(500).json({ error });

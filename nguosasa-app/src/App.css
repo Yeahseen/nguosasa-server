@@ -211,6 +211,10 @@
   margin-bottom: 15px;
 }
 
+.mvls-product-admin h1 {
+  padding: 0;
+}
+
 .mvls-product-cinema p:last-child {
   display: flex;
   flex-direction: row;
@@ -262,4 +266,37 @@
 pl {
   color: #cc2a2a;
 }
-/*cart css*/
+/*adminproduct page*/
+.mvls-form input[type='text'],
+.mvls-form textarea,
+.mvls-form input[type='number'] {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.mvls-form textarea.has-error,
+.mvls-form input.has-error {
+  border: 1px solid #dc3545;
+}
+
+.mvls-form .mvls-checkbox-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.mvls-form .mvls-checkbox-group label {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.mvls-alert-error {
+  color: red;
+}
