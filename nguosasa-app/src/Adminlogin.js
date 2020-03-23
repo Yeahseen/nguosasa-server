@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Login() {
+function Adminlogin() {
   return (
     <div className="mvls-container">
       <div className="login-form">
@@ -26,4 +26,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Adminlogin;

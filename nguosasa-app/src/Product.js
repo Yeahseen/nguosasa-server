@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import './App.css';
 
 function Product({ productDisplay }) {
-  const { id, name, price, description, poster, type } = productDisplay;
+  const { id, name, price, poster, type } = productDisplay;
   let typeIs = '';
 
   if (type === 'Retail') {

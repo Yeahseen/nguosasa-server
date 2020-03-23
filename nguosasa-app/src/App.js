@@ -26,7 +26,7 @@ function App() {
           <Adminlogin path="/Adminlogin" />
           <Signup path="/Signup" />
           <Cart path="/Cart" />
-          <Admin path="/Admin" />
+          <Admin path="/Admin001" />
         </Router>
       </main>
     </div>

@@ -86,22 +86,22 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/AdminLogin', function(request, response) {
+app.get('/Adminlogin', function(request, response) {
   response.sendFile(path.join(__dirname + '/Adminlogin'));
 });
 
 app.post('/authAdmin', function(request, response) {
-  var adminusername = request.body.adminusername;
-  var adminpassword = request.body.adminpassword;
-  if (adminusername && adminpassword) {
+  var username = request.body.username;
+  var password = request.body.password;
+  if (username && password) {
     pool.query(
       'SELECT * FROM admin WHERE username = ? AND password = ?',
-      [adminusername, adminpassword],
+      [username, password],
       function(error, results, fields) {
         if (results.length > 0) {
           request.session.loggedin = true;
-          request.session.adminusername = adminusername;
-          response.redirect('/Admin');
+          request.session.username = username;
+          response.redirect('/Admin001');
         } else {
           response.redirect('/Adminlogin');
         }
