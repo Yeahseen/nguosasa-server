@@ -36,6 +36,29 @@ app.get('/api/products/:id', (req, res) => {
   );
 });
 
+//Sellers query table
+app.get('/api/sellers', (req, res) => {
+  pool.query('SELECT id, name, phone, stallno FROM sellers', (error, rows) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/api/sellers/:id', (req, res) => {
+  pool.query(
+    'SELECT id, name, phone, stallno FROM sellers WHERE id = ?',
+    [req.params.id],
+    (error, rows) => {
+      if (error) {
+        return res.status(500).json({ error });
+      }
+      res.json(rows);
+    }
+  );
+});
+
 //login authentication//
 app.use(
   session({
