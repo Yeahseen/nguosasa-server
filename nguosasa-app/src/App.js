@@ -10,6 +10,7 @@ import Adminlogin from './Adminlogin';
 import './App.css';
 import Login from './Login';
 import Login2 from './Login2';
+import SellerDetails from './SellerDetails';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Router>
           <ProductList path="/" />
           <ProductDetails path="/product/:productId" />
+          <SellerDetails path="/SellerDetails/:sellerId" />
           <Login path="/Login" />
           <Login2 path="/Login2" />
           <Adminlogin path="/Adminlogin" />

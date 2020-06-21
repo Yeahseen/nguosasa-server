@@ -2,9 +2,16 @@ import React from 'react';
 
 function Cart() {
   return (
-    <div className="mvls-container">
-      <c1>Shopping Cart</c1>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+    </table>
   );
 }
 

@@ -25,7 +25,7 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/:id', (req, res) => {
   pool.query(
-    'SELECT id, name, price, poster, description, type FROM products WHERE id = ?',
+    'SELECT id, name, price, poster, description, type, sellers_id type FROM products WHERE id = ?',
     [req.params.id],
     (error, rows) => {
       if (error) {
