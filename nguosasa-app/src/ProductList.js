@@ -23,14 +23,14 @@ class ProductList extends React.Component {
 
     axios
       .get('/api/products')
-      .then(response => {
+      .then((response) => {
         this.setState({
           productsDisplay: response.data,
           loading: false,
           error: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           productsDisplay: [],
           loading: false,
@@ -53,10 +53,29 @@ class ProductList extends React.Component {
     return (
       <div className="mvls-container">
         <div className="mvls-product-list">
-          {productsDisplay.map(p => (
+          {productsDisplay.map((p) => (
             <Product key={p.id} productDisplay={p} />
           ))}
         </div>
+        <footer class="main-footer">
+          <div className="section-header">CART</div>
+          <div className="cart-row">
+            <span className="cart-item cart-header cart-column">ITEM</span>
+            <span className="cart-price cart-header cart-column">PRICE</span>
+            <span className="cart-quantity cart-header cart-column">
+              QUANTITY
+            </span>
+          </div>
+          <div className="cart-items"></div>
+
+          <div className="cart-total">
+            <strong className="cart-total-title">Total</strong>
+            <span className="cart-total-price">ksh 0</span>
+          </div>
+          <button className="btn btn-primary btn-purchase" type="button">
+            PURCHASE
+          </button>
+        </footer>
       </div>
     );
   }

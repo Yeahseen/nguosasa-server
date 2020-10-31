@@ -26,7 +26,7 @@ class ProductDetails extends React.Component {
     axios
       .all([productDetailsPromise])
       .then(
-        axios.spread(productDetailsResponse => {
+        axios.spread((productDetailsResponse) => {
           this.setState({
             productDetails: productDetailsResponse.data,
             loading: false,
@@ -34,7 +34,7 @@ class ProductDetails extends React.Component {
           });
         })
       )
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           productDetails: [],
           loading: false,
@@ -61,7 +61,12 @@ class ProductDetails extends React.Component {
       sellers_id,
     } = productDetails[0];
 
-    if (type === 'Wholesale') {
+    if (type === 'Retail') {
+      type = 'Item is in Retail';
+    } else if (type === 'Wholesale') {
+      type = 'Item is in Wholesale';
+    }
+    if (type === 'Wholesale')
       return (
         <div className="mvls-container">
           <div className="mvls-product-details-wrapper">
@@ -92,35 +97,34 @@ class ProductDetails extends React.Component {
           </div>
         </div>
       );
-    }
-
-    return (
-      <div className="mvls-container">
-        <div className="mvls-product-details-wrapper">
-          <div className="mvls-product-details">
-            <img
-              className="mvls-product-details-poster"
-              src={poster}
-              alt={name}
-            />
-            <div className="mvls-product-details-info">
-              <h2>{name}</h2>
-              <p>{description}</p>
-              <p>Sold in {type}</p>
-              <p>
-                <span>price Ksh : {price}</span>
-              </p>
-              <Link
-                to={`/SellerDetails/${sellers_id}`}
-                className="mvls-btn-retail"
-              >
-                See {sellers_id}
-              </Link>
+    else
+      return (
+        <div className="mvls-container">
+          <div className="mvls-product-details-wrapper">
+            <div className="mvls-product-details">
+              <img
+                className="mvls-product-details-poster"
+                src={poster}
+                alt={name}
+              />
+              <div className="mvls-product-details-info">
+                <h2>{name}</h2>
+                <p>{description}</p>
+                <p>Sold in Retail </p>
+                <p>
+                  <span>price Ksh : {price}</span>
+                </p>
+                <Link
+                  to={`/SellerDetails/${sellers_id}`}
+                  className="mvls-btn-retail"
+                >
+                  See {sellers_id}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
   }
 }
 

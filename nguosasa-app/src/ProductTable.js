@@ -9,7 +9,7 @@ function ProductTable({
   onDeleteProduct,
 }) {
   if (tableLoading) {
-    return <p className="mvls-table-loading">Loading movies...</p>;
+    return <p className="mvls-table-loading">Loading items...</p>;
   }
 
   return (
