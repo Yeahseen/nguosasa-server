@@ -1,6 +1,3 @@
-import React from 'react';
-import Cart from './Cart';
-
 //Onclick to cart
 function addToCartClicked(event) {
   var button = event.target;
@@ -9,9 +6,9 @@ function addToCartClicked(event) {
   var price = shopItem.getElementsByClassName('mvls-price')[0].innerText;
   var imgSrc = shopItem.getElementsByClassName('mvls-poster')[0].src;
 
-  console.log(title, price);
-
   addItemToCart(title, price, imgSrc);
+  updateCartTotal();
+
   function addItemToCart(name, price, poster) {
     var cartRow = document.createElement('div');
     cartRow.classList.add('cart-row');
@@ -36,6 +33,9 @@ function addToCartClicked(event) {
 
     cartRow.innerHTML = cartRowContents;
     cartItems.append(cartRow);
+    cartRow
+      .getElementsByClassName('btn-danger')[0]
+      .addEventListener('click', removeCartItem);
 
     function addToCart() {
       var addToCartButtons = document.getElementsByClassName(
@@ -46,8 +46,65 @@ function addToCartClicked(event) {
         button.addEventListener('click', addToCartClicked);
       }
     }
+
+    //removing cart items
+    function removeCartItem(event) {
+      var buttonClicked = event.target;
+      buttonClicked.parentElement.parentElement.remove();
+      updateCartTotal();
+    }
   }
-  //adding to cart
+  //updating cart total
+  function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
+    for (var i = 0; i < cartRows.length; i++) {
+      var cartRow = cartRows[i];
+      var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+      var quantityElement = cartRow.getElementsByClassName(
+        'cart-quantity-input'
+      )[0];
+      var price = parseFloat(priceElement.innerText.replace('Ksh', ''));
+      var quantity = quantityElement.value;
+      total = total + price * quantity;
+    }
+    document.getElementsByClassName('cart-total-price')[0].innerText =
+      'Ksh' + total;
+
+    ///purchase clicked
+
+    document
+      .getElementsByClassName('btn-purchase')[0]
+      .addEventListener('click', purchaseClicked);
+    var cartQuantityInputs = document.getElementsByClassName(
+      'cart-quantity-input'
+    );
+    for (var i = 0; i < cartQuantityInputs.length; i++) {
+      cartQuantityInputs[i].addEventListener('change', quantityChanged);
+    }
+    function purchaseClicked() {
+      var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+      while (cartItemContainer.hasChildNodes()) {
+        cartItemContainer.removeChild(cartItemContainer.firstChild);
+
+        alert('Thank you for your purchase!');
+      }
+      updateCartTotal();
+    }
+
+    //quanity is changed
+
+    function quantityChanged(event) {
+      var quantityInput = event.target;
+      if (isNaN(quantityInput.value) || quantityInput.value <= 0) {
+        quantityInput.value = 1;
+      }
+      updateCartTotal();
+    }
+  }
+
+  //adding item to cart
 
   // updating cart total
 
@@ -55,4 +112,5 @@ function addToCartClicked(event) {
 
   //changing quantity number
 }
+
 export default addToCartClicked;
