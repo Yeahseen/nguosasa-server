@@ -573,3 +573,21 @@ pl {
   margin: 40px auto 80px auto;
   font-size: 1.75em;
 }
+
+/*map addition*/
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 400px;
+  width: 900px;
+}
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 400px;
+  width: 900px;
+}
+
+.mvls-movie-admin h1 {
+  padding: 0;
+}

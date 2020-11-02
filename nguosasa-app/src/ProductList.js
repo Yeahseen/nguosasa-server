@@ -66,6 +66,7 @@ class ProductList extends React.Component {
               QUANTITY
             </span>
           </div>
+
           <div className="cart-items"></div>
 
           <div className="cart-total">
@@ -76,6 +77,20 @@ class ProductList extends React.Component {
             PURCHASE
           </button>
         </footer>
+        <div class="mapouter">
+          <div class="gmap_canvas">
+            <iframe
+              width="900"
+              height="400"
+              id="gmap_canvas"
+              src="https://maps.google.com/maps?q=Olympic%20Shopping%20Center%2C%20Sergeant%20Kahande%20St%2C%20Nairobi%20City&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              frameborder="5"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+            ></iframe>
+          </div>
+        </div>
       </div>
     );
   }

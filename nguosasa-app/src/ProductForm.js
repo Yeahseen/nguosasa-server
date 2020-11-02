@@ -57,7 +57,7 @@ function ProductForm({
           </div>
         </div>
         <div className="mvls-form-col">
-          <label htmlFor="releaseYear">Price</label>
+          <label htmlFor="price">Price</label>
           <div className="mvls-form-input-group">
             <input
               type="number"
@@ -143,7 +143,7 @@ function ProductForm({
               <label>
                 <input
                   type="checkbox"
-                  name="genres"
+                  name="type"
                   value="Wholesale"
                   checked={type.includes('Wholesale')}
                   onChange={handleToggleCheckbox}
@@ -153,7 +153,7 @@ function ProductForm({
               <label>
                 <input
                   type="checkbox"
-                  name="genres"
+                  name="type"
                   value="Retail"
                   checked={type.includes('Retail')}
                   onChange={handleToggleCheckbox}

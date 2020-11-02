@@ -10,8 +10,8 @@ class ProductAdmin extends React.Component {
       name: '',
       price: '',
       description: '',
+      seller: '',
       type: '',
-      seller: [],
       poster: '',
       editing: false,
       formSubmitting: false,
@@ -37,9 +37,9 @@ class ProductAdmin extends React.Component {
     this.setState({ tableLoading: true, tableError: false });
     axios
       .get('/api/products')
-      .then(response => {
+      .then((response) => {
         this.setState({
-          products: response.data.map(data => ({
+          products: response.data.map((data) => ({
             ...data,
             seller: data.seller_id,
           })),
@@ -47,7 +47,7 @@ class ProductAdmin extends React.Component {
           tableError: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           products: [],
           tableLoading: false,
@@ -61,7 +61,7 @@ class ProductAdmin extends React.Component {
       price: '',
       description: '',
       type: '',
-      seller: [],
+      seller: '',
       poster: '',
       editing: false,
       formSubmitting: false,
@@ -116,12 +116,12 @@ class ProductAdmin extends React.Component {
     const value = e.target.value;
 
     if (checked) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         type: prevState.type.concat(value),
       }));
     } else {
-      this.setState(prevState => ({
-        type: prevState.type.filter(type => type !== value),
+      this.setState((prevState) => ({
+        type: prevState.type.filter((type) => type !== value),
       }));
     }
   }
@@ -137,6 +137,7 @@ class ProductAdmin extends React.Component {
       type,
       poster,
       description,
+      seller_id,
       seller,
     } = this.state;
     if (this.isValid()) {
@@ -154,12 +155,12 @@ class ProductAdmin extends React.Component {
             price,
             description,
             type,
-            sellers_id: seller,
+            seller_id,
             poster,
           })
-          .then(response => {
+          .then((response) => {
             this.resetFormState();
-            const index = products.findIndex(c => c.id === id);
+            const index = products.findIndex((c) => c.id === id);
             this.setState({
               formSuccess: true,
               products: [
@@ -170,13 +171,13 @@ class ProductAdmin extends React.Component {
                   description,
                   type,
                   poster,
-                  seller: seller.join(','),
+                  seller_id,
                 },
                 ...products.slice(index + 1),
               ],
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               validationErrors: {},
               formSubmitting: false,
@@ -185,7 +186,7 @@ class ProductAdmin extends React.Component {
             });
           });
       } else {
-        // new record save
+        // new product save
         axios
           .post('/api/products', {
             name,
@@ -193,9 +194,9 @@ class ProductAdmin extends React.Component {
             description,
             type,
             poster,
-            seller_id: seller,
+            sellers_id: seller,
           })
-          .then(response => {
+          .then((response) => {
             this.resetFormState();
             this.setState({
               formSuccess: true,
@@ -208,12 +209,12 @@ class ProductAdmin extends React.Component {
                   description,
                   type,
                   price,
-                  seller: seller.join(','),
+                  seller,
                 },
               ],
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               validationErrors: {},
               formSubmitting: false,
@@ -241,8 +242,8 @@ class ProductAdmin extends React.Component {
       if (confirm(`Are you sure you want to delete '${name}'?`)) {
         axios
           .delete(`api/products/${id}`)
-          .then(response => {
-            const index = products.findIndex(c => c.id === id);
+          .then((response) => {
+            const index = products.findIndex((c) => c.id === id);
             this.setState({
               products: [
                 ...products.slice(0, index),
@@ -252,7 +253,7 @@ class ProductAdmin extends React.Component {
               tableError: false,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               deleteSuccess: false,
               tableError: true,
