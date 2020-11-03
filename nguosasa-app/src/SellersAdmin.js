@@ -10,7 +10,6 @@ class SellersAdmin extends React.Component {
       name: '',
       phone: '',
       stallno: '',
-      product: [],
       editing: false,
       formSubmitting: false,
       validationErrors: {},
@@ -35,9 +34,9 @@ class SellersAdmin extends React.Component {
     this.setState({ tableLoading: true, tableError: false });
     axios
       .get('/api/sellers')
-      .then(response => {
+      .then((response) => {
         this.setState({
-          sellers: response.data.map(data => ({
+          sellers: response.data.map((data) => ({
             ...data,
             product: data.product_id,
           })),
@@ -45,7 +44,7 @@ class SellersAdmin extends React.Component {
           tableError: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           sellers: [],
           tableLoading: false,
@@ -58,7 +57,6 @@ class SellersAdmin extends React.Component {
       name: '',
       phone: '',
       stallno: '',
-      product: [],
       editing: false,
       formSubmitting: false,
       validationErrors: {},
@@ -78,7 +76,7 @@ class SellersAdmin extends React.Component {
   }
   validateFormInput(data) {
     const validationErrors = {};
-    const { name, phone, stallno, product } = data;
+    const { name, phone, stallno } = data;
 
     if (!name) {
       validationErrors.name = 'This field is required';
@@ -88,9 +86,6 @@ class SellersAdmin extends React.Component {
     }
     if (!stallno) {
       validationErrors.stallno = 'This field is required';
-    }
-    if (Array.isArray(product) && product.length === 0) {
-      validationErrors.product = 'This field is required';
     }
     return {
       validationErrors,
@@ -108,19 +103,19 @@ class SellersAdmin extends React.Component {
     const value = e.target.value;
 
     if (checked) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         type: prevState.type.concat(value),
       }));
     } else {
-      this.setState(prevState => ({
-        type: prevState.type.filter(type => type !== value),
+      this.setState((prevState) => ({
+        type: prevState.type.filter((type) => type !== value),
       }));
     }
   }
   handleSubmit(e) {
     e.preventDefault();
 
-    const { editing, sellers, id, name, phone, stallno, product } = this.state;
+    const { editing, sellers, id, name, phone, stallno } = this.state;
     if (this.isValid()) {
       this.setState({
         validationErrors: {},
@@ -134,11 +129,10 @@ class SellersAdmin extends React.Component {
             name,
             phone,
             stallno,
-            product_id: product,
           })
-          .then(response => {
+          .then((response) => {
             this.resetFormState();
-            const index = sellers.findIndex(c => c.id === id);
+            const index = sellers.findIndex((c) => c.id === id);
             this.setState({
               formSuccess: true,
               sellers: [
@@ -148,13 +142,12 @@ class SellersAdmin extends React.Component {
                   name,
                   stallno,
                   phone,
-                  product: product.join(','),
                 },
                 ...sellers.slice(index + 1),
               ],
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               validationErrors: {},
               formSubmitting: false,
@@ -169,9 +162,8 @@ class SellersAdmin extends React.Component {
             name,
             phone,
             stallno,
-            product_id: product,
           })
-          .then(response => {
+          .then((response) => {
             this.resetFormState();
             this.setState({
               formSuccess: true,
@@ -182,12 +174,11 @@ class SellersAdmin extends React.Component {
                   name,
                   phone,
                   stallno,
-                  product: product.join(','),
                 },
               ],
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               validationErrors: {},
               formSubmitting: false,
@@ -214,8 +205,8 @@ class SellersAdmin extends React.Component {
       if (confirm(`Are you sure you want to delete ' ${name}'?`)) {
         axios
           .delete(`api/sellers/${id}`)
-          .then(response => {
-            const index = sellers.findIndex(c => c.id === id);
+          .then((response) => {
+            const index = sellers.findIndex((c) => c.id === id);
             this.setState({
               sellers: [
                 ...sellers.slice(0, index),
@@ -225,7 +216,7 @@ class SellersAdmin extends React.Component {
               tableError: false,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               deleteSuccess: false,
               tableError: true,
@@ -239,7 +230,6 @@ class SellersAdmin extends React.Component {
       name,
       phone,
       stallno,
-      product,
       editing,
       formSubmitting,
       validationErrors,
@@ -258,7 +248,6 @@ class SellersAdmin extends React.Component {
           name={name}
           phone={phone}
           stallno={stallno}
-          product={product}
           formSubmitting={formSubmitting}
           validationErrors={validationErrors}
           formSuccess={formSuccess}

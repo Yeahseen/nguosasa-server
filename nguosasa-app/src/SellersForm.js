@@ -2,9 +2,8 @@ import React from 'react';
 
 function SellersForm({
   name,
-  phone,
   stallno,
-  product,
+  phone,
   formSubmitting,
   validationErrors,
   formSuccess,
@@ -13,11 +12,7 @@ function SellersForm({
   resetFormState,
   handleSubmit,
 }) {
-  const disabled =
-    !name ||
-    !phone ||
-    !stallno ||
-    (Array.isArray(product) && product.length === 0);
+  const disabled = !name || !stallno || !phone;
 
   return (
     <form className="mvls-form" onSubmit={handleSubmit}>
@@ -33,7 +28,7 @@ function SellersForm({
       )}
       <div className="mvls-form-row">
         <div className="mvls-form-col">
-          <label htmlFor="title">Name</label>
+          <label htmlFor="name">Name</label>
           <div className="mvls-form-input-group">
             <input
               type="text"
@@ -44,7 +39,7 @@ function SellersForm({
               onChange={handleChange}
               disabled={formSubmitting}
             />
-            {validationErrors.title && (
+            {validationErrors.name && (
               <span className="mvls-form-input-error">
                 {validationErrors.name}
               </span>

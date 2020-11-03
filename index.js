@@ -52,27 +52,21 @@ app.post('/api/products', (req, res) => {
       return res.status(500).json({ error });
     }
 
-    connection.beginTransaction((error) => {
-      if (error) {
-        return res.status(500).json({ error });
-      }
-
-      connection.query(
-        'INSERT INTO products (name,price,description,type,poster,sellers_id) VALUES (?,?,?,?,?,?)',
-        [name, price, description, type, poster, sellers_id],
-        (error, results) => {
-          if (error) {
-            return connection.rollback(() => {
-              res.status(500).json({ error });
-            });
-          }
-
-          const insertId = results.insertId;
-
-          res.json(insertId);
+    connection.query(
+      'INSERT INTO products (name,price,description,type,poster,sellers_id) VALUES (?,?,?,?,?,?)',
+      [name, price, description, type, poster, sellers_id],
+      (error, results) => {
+        if (error) {
+          return connection.rollback(() => {
+            res.status(500).json({ error });
+          });
         }
-      );
-    });
+
+        const insertId = results.insertId;
+
+        res.json(insertId);
+      }
+    );
   });
 });
 
@@ -83,6 +77,36 @@ app.get('/api/sellers', (req, res) => {
       return res.status(500).json({ error });
     }
     res.json(rows);
+  });
+});
+// adding a seller in admin
+app.post('/api/sellers', (req, res) => {
+  const { name, stallno, phone } = req.body;
+
+  if (!name || !stallno || !phone) {
+    return res.status(400).json({ error: 'Invalid payload' });
+  }
+
+  pool.getConnection((error, connection) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+
+    connection.query(
+      'INSERT INTO sellers (name,stallno,phone) VALUES (?,?,?)',
+      [name, stallno, phone],
+      (error, results) => {
+        if (error) {
+          return connection.rollback(() => {
+            res.status(500).json({ error });
+          });
+        }
+
+        const insertId = results.insertId;
+
+        res.json(insertId);
+      }
+    );
   });
 });
 
@@ -99,7 +123,7 @@ app.get('/api/sellers/:id', (req, res) => {
   );
 });
 
-//login authentication//
+//determine a user is on session//
 app.use(
   session({
     secret: 'secret',
@@ -113,6 +137,7 @@ app.use(bodyParser.json());
 app.get('/', function (request, response) {
   response.sendFile(path.join(__dirname + '/Login'));
 });
+//sign up
 
 //login authentication
 app.post('/auth', function (request, response) {
