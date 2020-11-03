@@ -140,8 +140,8 @@ class SellersAdmin extends React.Component {
                 {
                   id,
                   name,
-                  stallno,
                   phone,
+                  stallno,
                 },
                 ...sellers.slice(index + 1),
               ],
@@ -192,7 +192,7 @@ class SellersAdmin extends React.Component {
     return () => {
       this.setState({
         ...seller,
-        type: seller.type.split(','),
+        name: seller.name.split(','),
         editing: true,
       });
     };

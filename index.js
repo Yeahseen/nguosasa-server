@@ -123,6 +123,21 @@ app.get('/api/sellers/:id', (req, res) => {
   );
 });
 
+// deleting a seller
+app.delete('/api/sellers/:id', (req, res) => {
+  pool.query(
+    'DELETE FROM sellers WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ error });
+      }
+
+      res.json(results.affectedRows);
+    }
+  );
+});
+
 //determine a user is on session//
 app.use(
   session({
