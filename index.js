@@ -4,6 +4,9 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -38,6 +41,8 @@ app.get('/api/products/:id', (req, res) => {
     }
   );
 });
+
+//stripe payment
 
 //add new product
 app.post('/api/products', (req, res) => {
