@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
+const cors = require('cors');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
 
@@ -16,6 +18,7 @@ const pool = mysql.createPool({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.get('/api/products', (req, res) => {
   pool.query(
@@ -182,6 +185,46 @@ app.post('/auth', function (request, response) {
     response.send('Please enter Username and Password!');
     response.end();
   }
+});
+// getting from orders
+app.get('/api/orders', (req, res) => {
+  pool.query('SELECT id FROM orders', (error, rows) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+    res.json(rows);
+  });
+});
+
+// stripe  post method
+app.post('/api/orders', (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Invalid payload' });
+  }
+
+  pool.getConnection((error, connection) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+
+    connection.query(
+      'INSERT INTO orders (id) VALUES (?)',
+      [id],
+      (error, results) => {
+        if (error) {
+          return connection.rollback(() => {
+            res.status(500).json({ error });
+          });
+        }
+
+        const insertId = results.insertId;
+
+        res.json(insertId);
+      }
+    );
+  });
 });
 
 //admin login authentication//

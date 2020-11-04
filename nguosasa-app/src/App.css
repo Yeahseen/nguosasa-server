@@ -557,6 +557,12 @@ pl {
   font-size: 1.75em;
 }
 
+.btn-pay {
+  display: block;
+  margin: 40px auto 80px auto;
+  font-size: 1.75em;
+}
+
 .btn-primary {
   color: white;
   background-color: #56ccf2;

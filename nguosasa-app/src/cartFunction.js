@@ -1,3 +1,5 @@
+import Stripe from 'stripe';
+
 //Onclick to cart
 function addToCartClicked(event) {
   var button = event.target;
@@ -89,8 +91,9 @@ function addToCartClicked(event) {
       while (cartItemContainer.hasChildNodes()) {
         cartItemContainer.removeChild(cartItemContainer.firstChild);
 
-        alert('Thank you for your purchase!');
+        window.open('./StripeContainer');
       }
+
       updateCartTotal();
     }
 

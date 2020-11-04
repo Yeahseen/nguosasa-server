@@ -9,7 +9,6 @@ function NavBar() {
         <span className="a">
           <Link to="/">Home</Link>
           <Link to="/Login">Login</Link>
-          <Link to="/Cart">Cart</Link>
           <Link to="/Signup">Sign Up</Link>
           <Link to="/Adminlogin">Admin</Link>
         </span>

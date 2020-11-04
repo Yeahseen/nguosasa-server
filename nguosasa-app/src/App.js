@@ -11,6 +11,7 @@ import './App.css';
 import Login from './Login';
 import Login2 from './Login2';
 import SellerDetails from './SellerDetails';
+import StripeContainer from './Stripe/StripeContainer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Login path="/Login" />
           <Login2 path="/Login2" />
           <Adminlogin path="/Adminlogin" />
+          <StripeContainer path="/StripeContainer" />
           <Signup path="/Signup" />
           <Cart path="/Cart" />
           <Admin path="/Admin001" />
