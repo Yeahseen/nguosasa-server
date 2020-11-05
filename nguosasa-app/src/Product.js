@@ -27,39 +27,35 @@ function Product({ productDisplay }) {
           <Link to={`product/${id}`} className="mvls-btn-retail">
             See {name}
           </Link>
-          <form className="mvls-form" onClick={addToCartClicked}>
-            {formSuccess && (
-              <button
-                className="btn btn-primary shop-item-button"
-                type="button"
-              >
-                Add to Cart.
-              </button>
-            )}
-          </form>
+          <button
+            onClick={addToCartClicked}
+            className="btn btn-primary shop-item-button"
+            type="button"
+          >
+            Add to Cart.
+          </button>
         </div>
       </div>
     );
-  }
+  } else
+    return (
+      <div className="mvls-container">
+        <div className="mvls-product">
+          <img className="mvls-poster" src={poster} alt={poster} />
+          <div className="mvls-product-body">
+            <div className="mvls-title">{name}</div>
+            <div className="mvls-title">Ksh {price}</div>
 
-  return (
-    <div className="mvls-container">
-      <div className="mvls-product">
-        <img className="mvls-poster" src={poster} alt={poster} />
-        <div className="mvls-product-body">
-          <div className="mvls-title">{name}</div>
-          <div className="mvls-title">Ksh {price}</div>
-
-          <p className="mvls-cinema-count">{typeIs}</p>
-        </div>
-        <div className="mvls-product-footer">
-          <Link to={`/product/${id}`} className="mvls-btn-retail">
-            See {name}
-          </Link>
+            <p className="mvls-cinema-count">{typeIs}</p>
+          </div>
+          <div className="mvls-product-footer">
+            <Link to={`/product/${id}`} className="mvls-btn-retail">
+              See {name}
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default Product;

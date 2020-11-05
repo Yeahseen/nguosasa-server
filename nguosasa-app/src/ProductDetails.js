@@ -107,7 +107,7 @@ class ProductDetails extends React.Component {
                 src={poster}
                 alt={name}
               />
-              <div className="mvls-product-details-info">
+              <div className="mvls-product-details-info" type="button">
                 <h2>{name}</h2>
                 <p>{description}</p>
                 <p>Sold in Retail </p>

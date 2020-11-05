@@ -1,5 +1,3 @@
-import Stripe from 'stripe';
-
 //Onclick to cart
 function addToCartClicked(event) {
   var button = event.target;
@@ -83,7 +81,7 @@ function addToCartClicked(event) {
     var cartQuantityInputs = document.getElementsByClassName(
       'cart-quantity-input'
     );
-    for (var i = 0; i < cartQuantityInputs.length; i++) {
+    for (i = 0; i < cartQuantityInputs.length; i++) {
       cartQuantityInputs[i].addEventListener('change', quantityChanged);
     }
     function purchaseClicked() {

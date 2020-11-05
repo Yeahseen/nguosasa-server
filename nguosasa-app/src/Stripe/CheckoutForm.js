@@ -1,72 +1,121 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import axios from 'axios';
-
-export const CheckoutForm = () => {
+import './Stripe.css';
+export default function CheckoutForm() {
+  const [succeeded, setSucceeded] = useState(false);
+  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState('');
+  const [disabled, setDisabled] = useState(true);
+  const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elements.getElement(CardElement),
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    window
+      .fetch('/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: [{ id: 'xl-tshirt' }] }),
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+      });
+  }, []);
+  const cardStyle = {
+    style: {
+      base: {
+        color: '#32325d',
+        fontFamily: 'Arial, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#32325d',
+        },
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a',
+      },
+    },
+  };
+  const handleChange = async (event) => {
+    // Listen for changes in the CardElement
+    // and display any errors as the customer types their card details
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : '');
+  };
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    setProcessing(true);
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
     });
-
-    if (!error) {
-      console.log(paymentMethod);
-
-      //sending token to backend here
-      try {
-        const { id } = paymentMethod;
-        const response = await axios.post('api/orders', {
-          amount: 999,
-          id: id,
-        });
-        if (response.data.success) {
-          console.log('payment successful');
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+      setProcessing(false);
     } else {
-      console.log(error.message);
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
     }
   };
-
   return (
-    <div className="mvls-container">
-      <div className="login-form">
+    <div className="body-stripe">
+      <form className="login-form" onSubmit={handleSubmit}>
         <h1> Checkout Form</h1>
-        <form action="post" onSubmit={handleSubmit}>
-          <input id="checkout" type="hidden" name="checkout" />
+        <p>Please Fill The Details Below</p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required="true"
+        ></input>
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          required="true"
+        ></input>
+        <input
+          type="number"
+          name="number"
+          placeholder="PhoneNumber"
+          required="true"
+        ></input>
 
-          <input
-            type="text"
-            name="Fullname"
-            required="true"
-            placeholder="Name"
-          />
-
-          <input type="text" name="Email" required="true" placeholder="Email" />
-          <input
-            type="Address"
-            name="address"
-            required="true"
-            placeholder="Address"
-          />
-          <input
-            type="number"
-            name="Telephone"
-            placeholder="Phone"
-            maxlenth="10"
-            required
-          ></input>
-
-          <CardElement />
-          <button className="btn btn-primary btn-purchase">Pay</button>
-        </form>
-      </div>
+        <CardElement
+          id="card-element"
+          options={cardStyle}
+          onChange={handleChange}
+        />
+        <button disabled={processing || disabled || succeeded} id="submit">
+          <span id="button-text">
+            {processing ? <div className="spinner" id="spinner"></div> : 'Pay'}
+          </span>
+        </button>
+        {/* Show any error that happens when processing the payment */}
+        {error && (
+          <div className="card-error" role="alert">
+            {error}
+          </div>
+        )}
+        {/* Show a success message upon completion */}
+        <p className={succeeded ? 'result-message' : 'result-message hidden'}>
+          Payment succeeded, see the result in your
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            {' '}
+            Stripe dashboard.
+          </a>{' '}
+          Refresh the page to pay again.
+        </p>
+      </form>
     </div>
   );
-};
+}

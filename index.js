@@ -46,6 +46,20 @@ app.get('/api/products/:id', (req, res) => {
 });
 
 //stripe payment
+const calculateOrderAmount = (items) => {
+  return 1400;
+};
+app.post('/create-payment-intent', async (req, res) => {
+  const { items } = req.body;
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: calculateOrderAmount(items),
+    currency: 'USD',
+  });
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
 
 //add new product
 app.post('/api/products', (req, res) => {
@@ -187,20 +201,9 @@ app.post('/auth', function (request, response) {
   }
 });
 // getting from orders
-app.get('/api/orders', (req, res) => {
-  pool.query('SELECT id FROM orders', (error, rows) => {
-    if (error) {
-      return res.status(500).json({ error });
-    }
-    res.json(rows);
-  });
-});
-
-// stripe  post method
 app.post('/api/orders', (req, res) => {
-  const { id } = req.body;
-
-  if (!id) {
+  const { order_id, name, email, amount, address, phone } = req.body;
+  if (!order_id || !name || !email || !amount || !address || !phone) {
     return res.status(400).json({ error: 'Invalid payload' });
   }
 
@@ -210,8 +213,8 @@ app.post('/api/orders', (req, res) => {
     }
 
     connection.query(
-      'INSERT INTO orders (id) VALUES (?)',
-      [id],
+      'INSERT INTO orders (order_id, name, email, amount, address, phone) VALUES (?,?,?,?,?,?)',
+      [order_id, name, email, amount, address, phone],
       (error, results) => {
         if (error) {
           return connection.rollback(() => {
@@ -228,19 +231,6 @@ app.post('/api/orders', (req, res) => {
 });
 
 //admin login authentication//
-app.use(
-  session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get('/Adminlogin', function (request, response) {
-  response.sendFile(path.join(__dirname + '/Adminlogin'));
-});
 
 app.post('/authAdmin', function (request, response) {
   var username = request.body.username;
