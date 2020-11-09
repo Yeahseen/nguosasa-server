@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
 const cors = require('cors');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
+const stripe = require('stripe')(
+  ' sk_test_51Hig1vE9WbRKB296qZ0DBdyJmkLusubSRedOizJ4TU6zkXtZACsSEqCyo8yJeVd6uzyrd0fDDWwqPRgKc5MYsk1900fxH8yP76'
+);
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
 
@@ -34,7 +36,7 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/:id', (req, res) => {
   pool.query(
-    'SELECT id, name, price, poster, description, type, sellers_id type FROM products WHERE id = ?',
+    'SELECT id, name, price, poster, description, type, sellers_id FROM products WHERE id = ?',
     [req.params.id],
     (error, rows) => {
       if (error) {
@@ -46,19 +48,29 @@ app.get('/api/products/:id', (req, res) => {
 });
 
 //stripe payment
-const calculateOrderAmount = (items) => {
-  return 1400;
-};
-app.post('/create-payment-intent', async (req, res) => {
-  const { items } = req.body;
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: 'USD',
-  });
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
+app.post('/stripe/charge', cors(), async (req, res) => {
+  console.log('stripe-routes.js 9 | route reached', req.body);
+  let { amount, id, customer } = req.body;
+  console.log('stripe-routes.js 10 | amount and id', amount, id);
+  try {
+    const payment = await stripe.charges.create({
+      customer: customer,
+      amount,
+      currency: 'kes',
+      description: 'Nguosasa Stripe Shop',
+    });
+    console.log('stripe-routes.js 19 | payment', payment);
+    res.json({
+      message: 'Payment Successful',
+      success: true,
+    });
+  } catch (error) {
+    console.log('stripe-routes.js 17 | error', error);
+    res.json({
+      message: 'Payment Failed',
+      success: false,
+    });
+  }
 });
 
 //add new product
@@ -200,6 +212,37 @@ app.post('/auth', function (request, response) {
     response.end();
   }
 });
+//Sign Up Authentication
+app.post('/authreg', (req, res) => {
+  var { name, username, address, password, telephone, email } = req.body;
+  if (!name || !username || !address || !password || !telephone || !email) {
+    return res.status(400).json({ error: 'Invalid payload' });
+  }
+
+  pool.getConnection((error, connection) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+
+    connection.query(
+      'INSERT INTO customers (name, username, address, password, telephone, email) VALUES (?,?,?,?,?,?)',
+      [name, username, address, password, telephone, email],
+      (error, results) => {
+        if (error) {
+          return connection.rollback(() => {
+            res.status(500).json({ error });
+          });
+        }
+
+        const insertId = results.insertId;
+
+        res.json(insertId);
+        res.redirect('/Login');
+      }
+    );
+  });
+});
+
 // getting from orders
 app.post('/api/orders', (req, res) => {
   const { order_id, name, email, amount, address, phone } = req.body;

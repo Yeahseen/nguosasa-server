@@ -7,7 +7,7 @@ import Cart from './Cart';
 import './App.css';
 
 function Product({ productDisplay }) {
-  const { id, name, price, poster, type, imgSrc } = productDisplay;
+  const { id, name, price, poster, type, imgSrc, sellers_id } = productDisplay;
   let typeIs = '';
 
   if (type === 'Retail') {
@@ -24,38 +24,41 @@ function Product({ productDisplay }) {
           <div className="mvls-price">Ksh {price}</div>
         </div>
         <div className="mvls-product-footer">
-          <Link to={`product/${id}`} className="mvls-btn-retail">
-            See {name}
+          <Link to={`product/${sellers_id}`} className="mvls-btn-retail">
+            See More
           </Link>
-          <button
-            onClick={addToCartClicked}
-            className="btn btn-primary shop-item-button"
-            type="button"
-          >
-            Add to Cart.
-          </button>
+          <form onClick={addToCartClicked}>
+            {formSuccess && (
+              <button
+                className="btn btn-primary shop-item-button"
+                type="button"
+              >
+                Add to Cart.
+              </button>
+            )}
+          </form>
         </div>
       </div>
     );
-  } else
-    return (
-      <div className="mvls-container">
-        <div className="mvls-product">
-          <img className="mvls-poster" src={poster} alt={poster} />
-          <div className="mvls-product-body">
-            <div className="mvls-title">{name}</div>
-            <div className="mvls-title">Ksh {price}</div>
+  }
+  return (
+    <div className="mvls-container">
+      <div className="mvls-product">
+        <img className="mvls-poster" src={poster} alt={poster} />
+        <div className="mvls-product-body">
+          <div className="mvls-name">{name}</div>
+          <div className="mvls-price">Ksh {price}</div>
 
-            <p className="mvls-cinema-count">{typeIs}</p>
-          </div>
-          <div className="mvls-product-footer">
-            <Link to={`/product/${id}`} className="mvls-btn-retail">
-              See {name}
-            </Link>
-          </div>
+          <p className="mvls-cinema-count">{typeIs}</p>
+        </div>
+        <div className="mvls-product-footer">
+          <Link to={`/product/${id}`} className="mvls-btn-retail">
+            See More
+          </Link>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Product;

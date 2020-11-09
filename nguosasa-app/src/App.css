@@ -12,6 +12,7 @@
   margin: 0 auto;
   padding: 0 6px;
   font: arial;
+  text-align: center;
 }
 
 .mvls-header .mvls-container {
@@ -266,6 +267,8 @@ btn:disabled {
 .login-form {
   margin: 0 auto;
   font-family: Tahoma, Geneva, sans-serif;
+  display: inline-block;
+  text-align: center;
 }
 .login-form h1 {
   text-align: center;

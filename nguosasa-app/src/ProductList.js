@@ -73,6 +73,7 @@ class ProductList extends React.Component {
             <strong className="cart-total-title">Total</strong>
             <span className="cart-total-price">ksh 0</span>
           </div>
+
           <button className="btn-purchase" type="button">
             PURCHASE
           </button>

@@ -52,7 +52,7 @@ class ProductDetails extends React.Component {
     if (error) {
       return <Error />;
     }
-    const {
+    var {
       name,
       type,
       poster,
@@ -90,7 +90,7 @@ class ProductDetails extends React.Component {
                   to={`/SellerDetails/${sellers_id}`}
                   className="mvls-btn-retail"
                 >
-                  See {name}
+                  See Seller Details
                 </Link>
               </div>
             </div>
@@ -118,7 +118,7 @@ class ProductDetails extends React.Component {
                   to={`/SellerDetails/${sellers_id}`}
                   className="mvls-btn-retail"
                 >
-                  See {sellers_id}
+                  See Seller Details
                 </Link>
               </div>
             </div>

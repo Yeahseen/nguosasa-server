@@ -1,3 +1,6 @@
+import StripeContainer from './Stripe/StripeContainer';
+import Stripe from './Stripe/StripeContainer';
+
 //Onclick to cart
 function addToCartClicked(event) {
   var button = event.target;
@@ -73,8 +76,6 @@ function addToCartClicked(event) {
     document.getElementsByClassName('cart-total-price')[0].innerText =
       'Ksh' + total;
 
-    ///purchase clicked
-
     document
       .getElementsByClassName('btn-purchase')[0]
       .addEventListener('click', purchaseClicked);
@@ -84,14 +85,29 @@ function addToCartClicked(event) {
     for (i = 0; i < cartQuantityInputs.length; i++) {
       cartQuantityInputs[i].addEventListener('change', quantityChanged);
     }
+
+    ///purchase clicked
     function purchaseClicked() {
+      var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+      var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+      var priceElement = document.getElementsByClassName('cart-total-price')[0];
+      var price = parseFloat(priceElement.innerText.replace('Ksh', ''));
+      for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i];
+
+        var nameElement = cartRow.getElementsByClassName('cart-item-title')[0];
+
+        var name = nameElement.innerText;
+      }
+
+      console.log(price, name);
       var cartItemContainer = document.getElementsByClassName('cart-items')[0];
       while (cartItemContainer.hasChildNodes()) {
         cartItemContainer.removeChild(cartItemContainer.firstChild);
-
-        window.open('./StripeContainer');
       }
-
+      Stripe();
+      StripeContainer(price);
+      window.open('./StripeContainer');
       updateCartTotal();
     }
 
