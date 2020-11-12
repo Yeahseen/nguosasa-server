@@ -15,6 +15,7 @@ function Product({ productDisplay }) {
   } else if (type === 'Wholesale') {
     typeIs = 'Item is in Wholesale';
   }
+
   if (type === 'Wholesale') {
     return (
       <div className="mvls-product">
@@ -27,10 +28,11 @@ function Product({ productDisplay }) {
           <Link to={`product/${sellers_id}`} className="mvls-btn-retail">
             See More
           </Link>
-          <form onClick={addToCartClicked}>
+          <form>
             {formSuccess && (
               <button
                 className="btn btn-primary shop-item-button"
+                onClick={addToCartClicked}
                 type="button"
               >
                 Add to Cart.

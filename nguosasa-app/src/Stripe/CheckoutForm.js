@@ -2,6 +2,7 @@ import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Axios from 'axios';
 import ProductList from '../ProductList';
+import './Stripe.css';
 export const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
@@ -21,12 +22,13 @@ export const CheckoutForm = () => {
         const response = await Axios.post('/stripe/charge', {
           customer: 'cus_IL6oS7cFj1zS3e',
           id: id,
-          amount: 99999,
+          amount: 34449,
         });
         console.log('stripe35 | data', response.data.success);
 
         if (response.data.success) {
           console.log('CheckoutForm.js 25 | payment successful!');
+          alert('Payment is succeful', ProductList);
           return <ProductList />;
         }
       } catch (error) {
@@ -39,11 +41,7 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <form
-      className="form-stripe"
-      onSubmit={handleSubmit}
-      style={{ maxWidth: 400 }}
-    >
+    <form className="form" onSubmit={handleSubmit}>
       <CardElement />
       <button>Pay</button>
     </form>

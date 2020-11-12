@@ -22,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+//stripe intergration
+
 app.get('/api/products', (req, res) => {
   pool.query(
     'SELECT id, name, price, type, poster, description, sellers_id FROM products',
@@ -54,7 +56,7 @@ app.post('/stripe/charge', cors(), async (req, res) => {
   console.log('stripe-routes.js 10 | amount and id', amount, id);
   try {
     const payment = await stripe.charges.create({
-      customer: customer,
+      customer,
       amount,
       currency: 'kes',
       description: 'Nguosasa Stripe Shop',
@@ -65,7 +67,7 @@ app.post('/stripe/charge', cors(), async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log('stripe-routes.js 17 | error', error);
+    console.log('Payment Failed stripe-routes.js 17 | error', error);
     res.json({
       message: 'Payment Failed',
       success: false,
@@ -212,11 +214,18 @@ app.post('/auth', function (request, response) {
     response.end();
   }
 });
-//Sign Up Authentication
-app.post('/authreg', (req, res) => {
-  var { name, username, address, password, telephone, email } = req.body;
+
+//sign up authentication
+app.post('/authreg', (request, response) => {
+  var name = request.body.Fullname;
+  var username = request.body.Username;
+  var address = request.body.Address;
+  var password = request.body.Password;
+  var telephone = request.body.Telephone;
+  var email = request.body.Email;
+
   if (!name || !username || !address || !password || !telephone || !email) {
-    return res.status(400).json({ error: 'Invalid payload' });
+    return response.status(400).json({ error: 'Invalid payload' });
   }
 
   pool.getConnection((error, connection) => {
@@ -227,17 +236,15 @@ app.post('/authreg', (req, res) => {
     connection.query(
       'INSERT INTO customers (name, username, address, password, telephone, email) VALUES (?,?,?,?,?,?)',
       [name, username, address, password, telephone, email],
-      (error, results) => {
+      (error) => {
         if (error) {
           return connection.rollback(() => {
-            res.status(500).json({ error });
+            response.status(500).json({ error });
+            response.redirect('/Signup');
           });
         }
 
-        const insertId = results.insertId;
-
-        res.json(insertId);
-        res.redirect('/Login');
+        response.redirect('/Login');
       }
     );
   });

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Loading from './Loading';
 import Error from './Error';
 import Product from './Product';
+import PayPalButton from './Stripe/PaypalButton';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class ProductList extends React.Component {
             <Product key={p.id} productDisplay={p} />
           ))}
         </div>
+
         <footer class="main-footer">
           <div className="section-header">CART</div>
           <div className="cart-row">
@@ -77,6 +79,10 @@ class ProductList extends React.Component {
           <button className="btn-purchase" type="button">
             PURCHASE
           </button>
+
+          <button type="button">
+            <PayPalButton total />
+          </button>
         </footer>
         <div class="mapouter">
           <div class="gmap_canvas">
@@ -87,8 +93,8 @@ class ProductList extends React.Component {
               src="https://maps.google.com/maps?q=Olympic%20Shopping%20Center%2C%20Sergeant%20Kahande%20St%2C%20Nairobi%20City&t=&z=13&ie=UTF8&iwloc=&output=embed"
               frameborder="5"
               scrolling="no"
-              marginheight="0"
-              marginwidth="0"
+              marginHeight="0"
+              marginWidth="0"
             ></iframe>
           </div>
         </div>

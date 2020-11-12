@@ -86,6 +86,9 @@ class ProductDetails extends React.Component {
                 <form action="/cart" method="post">
                   <input type="submit" value="Add To Cart"></input>
                 </form>
+                <link to={`/`} className>
+                  Back To Products
+                </link>
                 <Link
                   to={`/SellerDetails/${sellers_id}`}
                   className="mvls-btn-retail"
