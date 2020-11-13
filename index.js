@@ -22,8 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-//stripe intergration
-
 app.get('/api/products', (req, res) => {
   pool.query(
     'SELECT id, name, price, type, poster, description, sellers_id FROM products',

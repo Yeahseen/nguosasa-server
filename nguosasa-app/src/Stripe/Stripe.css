@@ -35,7 +35,92 @@
   height: 37px;
   background-color: #051a38;
   border-radius: 2px;
-  color: #fff;
+  color: rgb(248, 248, 248);
   cursor: pointer;
   margin-top: 20px;
+}
+
+/*stripe*/
+* {
+  box-sizing: border-box;
+}
+
+input,
+button {
+  appearance: none;
+  outline: none;
+  border-style: none;
+}
+
+.FormGroup {
+  margin: 0 15px 20px;
+  border-style: none;
+  background-color: #152149;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #829fff;
+  border-radius: 4px;
+}
+
+.FormRow {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.FormRow:first-child {
+  border-top: none;
+}
+
+.FormRowInput {
+  font-size: 16px;
+  width: 100%;
+  padding: 11px 15px 11px 0;
+
+  color: #fff;
+  background-color: transparent;
+  animation: 1ms void-animation-out;
+  padding-top: 20px;
+  text-align: center;
+  font-weight: 500;
+  font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+  font-size: 16px;
+  font-smooth: antialiased;
+}
+
+.FormRowInput::placeholder {
+  color: #b1bdca;
+  font-weight: 500;
+  font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+  font-size: 16px;
+  font-smooth: antialiased;
+  padding: 10px;
+}
+
+.StripeElement--webkit-autofill {
+  background: transparent !important;
+}
+
+.StripeElement {
+  width: 100%;
+  padding: 11px 15px 11px 0;
+}
+
+.SubmitButton {
+  display: block;
+  font-size: 16px;
+  width: calc(100% - 30px);
+  height: 40px;
+  margin: 40px 15px 0;
+  background-color: #162b3f;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #ffb9f6;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+  will-change: transform, background-color, box-shadow;
 }
