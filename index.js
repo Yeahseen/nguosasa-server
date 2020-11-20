@@ -304,47 +304,54 @@ app.post('/authreg', (request, response) => {
   if (!name || !username || !address || !password || !telephone || !email) {
     return response.status(400).json({ error: 'Invalid payload' });
   }
+  pool.getConnection((error, connection) => {
+    if (error) {
+      return response.status(500).json({ error });
+    }
 
-  if (email) {
-    pool.query('SELECT * FROM customers WHERE email = ?', [email], function (
-      error,
-      results,
+    if (email) {
+      connection.query(
+        'SELECT * FROM customers WHERE email = ?',
+        [email],
+        function (
+          error,
+          results,
 
-      fields
-    ) {
-      if (results.length > 0) {
-        return response.status(400).json({ error: 'Email already Exists' });
-      } else {
-        bcrypt.hash(password, saltRounds, function (error, hash) {
-          pool.query(
-            'INSERT INTO customers (name, username, address, password, telephone, email) VALUES (?,?,?,?,?,?)',
-            [name, username, address, hash, telephone, email],
-            (error) => {
-              if (error) {
-                return connection.rollback(() => {
-                  response.status(500).json({ error });
-                  response.redirect('/Signup');
-                });
-              }
+          fields
+        ) {
+          if (results.length > 0) {
+            return response.status(400).json({ error: 'Email already Exists' });
+          } else {
+            bcrypt.hash(password, saltRounds, function (error, hash) {
+              connection.query(
+                'INSERT INTO customers (name, username, address, password, telephone, email) VALUES (?,?,?,?,?,?)',
+                [name, username, address, hash, telephone, email],
+                (error) => {
+                  if (error) {
+                    return connection.rollback(() => {
+                      response.redirect('/Signup');
+                    });
+                  }
 
-              pool.query('SELECT LAST_INSERT_ID() as user_id', function (
-                error,
-                results,
-                fields
-              ) {
-                if (error) throw error;
-                const user_id = results[0];
-                console.log(results[0]);
-                request.login(user_id, function (err) {
-                  response.redirect('/');
-                });
-              });
-            }
-          );
-        });
-      }
-    });
-  }
+                  connection.query(
+                    'SELECT LAST_INSERT_ID() as user_id',
+                    function (error, results, fields) {
+                      if (error) throw error;
+                      const user_id = results[0];
+                      console.log(results[0]);
+                      request.login(user_id, function (err) {
+                        response.redirect('/Login');
+                      });
+                    }
+                  );
+                }
+              );
+            });
+          }
+        }
+      );
+    }
+  });
 });
 
 passport.serializeUser(function (user_id, done) {
