@@ -41,7 +41,7 @@ class ProductAdmin extends React.Component {
         this.setState({
           products: response.data.map((data) => ({
             ...data,
-            seller: data.seller_id,
+            seller: data.sellers_id,
           })),
           tableLoading: false,
           tableError: false,
@@ -137,7 +137,7 @@ class ProductAdmin extends React.Component {
       type,
       poster,
       description,
-      seller_id,
+      sellers_id,
       seller,
     } = this.state;
     if (this.isValid()) {
@@ -155,7 +155,7 @@ class ProductAdmin extends React.Component {
             price,
             description,
             type,
-            seller_id,
+            sellers_id: seller,
             poster,
           })
           .then((response) => {
@@ -171,7 +171,8 @@ class ProductAdmin extends React.Component {
                   description,
                   type,
                   poster,
-                  seller_id,
+                  price,
+                  seller,
                 },
                 ...products.slice(index + 1),
               ],
@@ -229,7 +230,6 @@ class ProductAdmin extends React.Component {
     return () => {
       this.setState({
         ...product,
-        type: product.type.split(','),
         editing: true,
       });
     };

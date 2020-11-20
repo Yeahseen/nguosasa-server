@@ -25,7 +25,7 @@ function Product({ productDisplay }) {
           <div className="mvls-price">Ksh {price}</div>
         </div>
         <div className="mvls-product-footer">
-          <Link to={`product/${sellers_id}`} className="mvls-btn-retail">
+          <Link to={`product/${id}`} className="mvls-btn-retail">
             See More
           </Link>
           <form>

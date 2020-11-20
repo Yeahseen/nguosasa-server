@@ -28,6 +28,7 @@ function App() {
           <Login2 path="/Login2" />
           <Adminlogin path="/Adminlogin" />
           <StripeContainer path="/StripeContainer" />
+
           <Signup path="/Signup" />
           <Cart path="/Cart" />
           <Admin path="/Admin001" />

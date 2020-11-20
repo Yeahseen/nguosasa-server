@@ -1,6 +1,6 @@
 import StripeContainer from './Stripe/StripeContainer';
 import Stripe from './Stripe/StripeContainer';
-
+import purchaseClicked from './PurchaseClicked';
 function addToCartClicked(event) {
   var button = event.target;
   var shopItem = button.parentElement.parentElement.parentElement;
@@ -35,6 +35,7 @@ function addItemToCart(name, price, poster) {
 </div>`;
 
   cartRow.innerHTML = cartRowContents;
+
   cartItems.append(cartRow);
   cartRow
     .getElementsByClassName('btn-danger')[0]
@@ -85,23 +86,6 @@ function updateCartTotal() {
   for (i = 0; i < cartQuantityInputs.length; i++) {
     cartQuantityInputs[i].addEventListener('change', quantityChanged);
   }
-}
-
-function purchaseClicked() {
-  var priceElement = document.getElementsByClassName('cart-total-price')[0];
-  var total = parseFloat(priceElement.innerText.replace('Ksh', ''));
-
-  var cartItemContainer = document.getElementsByClassName('cart-items')[0];
-  while (cartItemContainer.hasChildNodes()) {
-    cartItemContainer.removeChild(cartItemContainer.firstChild);
-  }
-
-  Stripe();
-  StripeContainer(total);
-  window.open('./StripeContainer');
-  console.log(total);
-  updateCartTotal();
-  return total;
 }
 
 function quantityChanged(event) {

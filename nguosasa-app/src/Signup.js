@@ -3,6 +3,9 @@ import React from 'react';
 function Signup() {
   return (
     <div className="mvls-container">
+      <p>
+        Alredy Register? <a href="/Login"> login </a>
+      </p>
       <div className="login-form">
         <h1>Please Sign up in the form below</h1>
         <form action="authreg" method="POST">
@@ -10,14 +13,16 @@ function Signup() {
             type="text"
             name="Fullname"
             placeholder="Fullname"
+            autoComplete="off"
             maxlenth="25"
             required="true"
           ></input>
+
           <input
             type="text"
             name="Username"
             placeholder="Username"
-            maxlenth="8"
+            minlenth="8"
             required="true"
           ></input>
           <input
@@ -25,14 +30,14 @@ function Signup() {
             name="Password"
             placeholder="Password"
             minlenth="8"
-            required
+            required="true"
           ></input>
           <input
             type="Password"
             name="Cpassword"
             placeholder="Confirm Password"
             minlenth="8"
-            required
+            required="true"
           ></input>
 
           <input
@@ -40,7 +45,7 @@ function Signup() {
             name="Address"
             placeholder="Address"
             maxlenth="50"
-            required
+            required="true"
           ></input>
 
           <input
@@ -48,7 +53,7 @@ function Signup() {
             name="Telephone"
             placeholder="Telephone"
             maxlenth="15"
-            required
+            required=" true"
           ></input>
 
           <input
@@ -56,7 +61,7 @@ function Signup() {
             name="Email"
             placeholder="Email"
             maxlenth="50"
-            required
+            required="true"
           ></input>
           <input className="button" type="submit"></input>
         </form>

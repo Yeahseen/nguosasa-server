@@ -3,7 +3,6 @@ import axios from 'axios';
 import Loading from './Loading';
 import Error from './Error';
 import Product from './Product';
-import PayPalButton from './Stripe/PaypalButton';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -60,7 +59,7 @@ class ProductList extends React.Component {
         </div>
 
         <footer class="main-footer">
-          <div className="section-header">CART</div>
+          <h1>CART</h1>
           <div className="cart-row">
             <span className="cart-item cart-header cart-column">ITEM</span>
             <span className="cart-price cart-header cart-column">PRICE</span>
@@ -78,10 +77,6 @@ class ProductList extends React.Component {
 
           <button className="btn-purchase" type="button">
             PURCHASE
-          </button>
-
-          <button type="button">
-            <PayPalButton total />
           </button>
         </footer>
         <div class="mapouter">

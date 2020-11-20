@@ -10,13 +10,13 @@ function Login() {
             type="text"
             name="username"
             placeholder="username"
-            required
+            required="true"
           ></input>
           <input
             type="password"
             name="password"
             placeholder="password"
-            required
+            required="true"
           ></input>
           <input type="submit"></input>
         </form>

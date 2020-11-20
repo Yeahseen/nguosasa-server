@@ -3,39 +3,39 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Axios from 'axios';
 import ProductList from '../ProductList';
 import './Stripe.css';
+import { Redirect } from '@reach/router';
 export const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      card: elements.getElement(CardElement, {
-        style: {
-          base: {
-            lineHeight: '1.429',
-          },
-          font: {},
-        },
-      }),
+      card: elements.getElement(CardElement),
     });
 
     if (!error) {
       console.log('Stripe 23 | token generated!', paymentMethod);
       try {
-        const { id } = paymentMethod;
+        const { id, name, email, phone } = paymentMethod;
 
         const response = await Axios.post('/stripe/charge', {
           customer: 'cus_IL6oS7cFj1zS3e',
           id: id,
-          amount: 5349 * 100,
+          amount: 800 * 100,
+
+          name: name,
+          email: email,
+          phone: phone,
         });
         console.log('stripe35 | data', response.data.success);
 
         if (response.data.success) {
           console.log('CheckoutForm.js 25 | payment successful!');
           alert('Your payment Has been Received Thanks', ProductList);
+          Redirect('/');
         }
       } catch (error) {
         console.log('CheckoutForm.js 28 | ', error);
@@ -68,23 +68,30 @@ export const CheckoutForm = () => {
   return (
     <div className="mvls-container">
       <h1>Please Fill The Form Below</h1>
-      <form onSubmit={handleSubmit} options={CARD_OPTIONS}>
+      <form
+        onSubmit={handleSubmit}
+        options={CARD_OPTIONS}
+        action="/stripe/charge"
+        method="post"
+      >
         <fieldset className="FormGroup">
           <input
             className="FormRowInput"
-            name=" email"
+            name=" fullName"
             placeholder="FullName"
-          ></input>
-
-          <input
-            className="FormRowInput"
-            placeholder="Email"
             required="true"
           ></input>
 
           <input
             className="FormRowInput"
+            name=" email"
+            placeholder="Email"
+            required="true"
+          ></input>
+          <input
+            className="FormRowInput"
             placeholder="Phone"
+            name=" phone"
             required="true"
           ></input>
         </fieldset>
