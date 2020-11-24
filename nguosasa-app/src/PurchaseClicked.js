@@ -11,5 +11,5 @@ export default function purchaseClicked(res) {
     cartItemContainer.removeChild(cartItemContainer.firstChild);
   }
   console.log(total);
-  return total;
+  return <Stripe />;
 }

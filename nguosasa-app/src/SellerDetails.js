@@ -23,7 +23,7 @@ class SellerDetails extends React.Component {
     axios
       .all([sellerDetailsPromise])
       .then(
-        axios.spread(sellerDetailsResponse => {
+        axios.spread((sellerDetailsResponse) => {
           this.setState({
             sellerDetails: sellerDetailsResponse.data,
             loading: false,
@@ -31,7 +31,7 @@ class SellerDetails extends React.Component {
           });
         })
       )
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           sellerDetails: [],
           loading: false,
@@ -55,9 +55,15 @@ class SellerDetails extends React.Component {
           <div className="mvls-product-details">
             <div className="mvls-product-details-info">
               <h2>
-                <span>Name: {name}</span>
+                <span>Details Of The Seller</span>
               </h2>
-              <p> Stall Number: {stallno}</p>
+              <p>
+                <span>Name: {name}</span>
+              </p>
+              <p>
+                {' '}
+                <span>Stall Number: {stallno}</span>
+              </p>
               <p>
                 <span>Phone Number: {phone}</span>
               </p>

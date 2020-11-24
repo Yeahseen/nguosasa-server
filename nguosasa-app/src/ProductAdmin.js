@@ -137,7 +137,7 @@ class ProductAdmin extends React.Component {
       type,
       poster,
       description,
-      sellers_id,
+
       seller,
     } = this.state;
     if (this.isValid()) {

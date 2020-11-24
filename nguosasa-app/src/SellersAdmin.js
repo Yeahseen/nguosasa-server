@@ -156,7 +156,7 @@ class SellersAdmin extends React.Component {
             });
           });
       } else {
-        // new record save
+        // new seller
         axios
           .post('/api/sellers', {
             name,

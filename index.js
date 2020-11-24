@@ -156,6 +156,26 @@ app.put('/api/products/:id', (req, res) => {
   );
 });
 
+//Updating Sellers
+app.put('/api/sellers/:id', (req, res) => {
+  const { name, stallno, phone } = req.body;
+
+  if (!name || !stallno || !phone) {
+    return res.status(400).json({ error: 'Invalid payload' });
+  }
+  pool.query(
+    'UPDATE sellers SET name = ?, stallno = ?, phone = ? WHERE id = ?',
+    [name, stallno, phone, req.params.id],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ error });
+      }
+
+      res.json(results.changedRows);
+    }
+  );
+});
+
 //deleting a product
 app.delete('/api/products/:id', (req, res) => {
   pool.query(

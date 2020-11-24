@@ -24,7 +24,7 @@ export const CheckoutForm = () => {
         const response = await Axios.post('/stripe/charge', {
           customer: 'cus_IL6oS7cFj1zS3e',
           id: id,
-          amount: 800 * 100,
+          amount: 11600 * 100,
 
           name: name,
           email: email,

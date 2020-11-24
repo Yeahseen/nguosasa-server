@@ -4,8 +4,7 @@ function Adminlogin() {
   return (
     <div className="mvls-container">
       <div className="login-form">
-        <h1> Login Form</h1>
-        <p>login as Admin</p>
+        <h1>Admin Login Form</h1>
         <form action="authAdmin" method="POST">
           <input
             type="text"

@@ -136,31 +136,20 @@ function ProductForm({
             )}
           </div>
         </div>
+      </div>
+      <div className="mvls-form-row">
         <div className="mvls-form-col">
-          <label>Type</label>
+          <label htmlFor="type">Type</label>
           <div className="mvls-form-input-group">
-            <div className="mvls-checkbox-group">
-              <label>
-                <input
-                  type="checkbox"
-                  name="type"
-                  value="Wholesale"
-                  checked={type.includes('Wholesale')}
-                  onChange={handleToggleCheckbox}
-                />
-                &nbsp;Wholesale
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="type"
-                  value="Retail"
-                  checked={type.includes('Retail')}
-                  onChange={handleToggleCheckbox}
-                />
-                &nbsp;Retail
-              </label>
-            </div>
+            <input
+              type="text"
+              name="type"
+              className={validationErrors.type ? 'has-error' : ''}
+              autoComplete="off"
+              value={type}
+              onChange={handleChange}
+              disabled={formSubmitting}
+            />
             {validationErrors.type && (
               <span className="mvls-form-input-error">
                 {validationErrors.type}

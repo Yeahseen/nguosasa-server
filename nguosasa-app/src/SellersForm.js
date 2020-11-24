@@ -28,7 +28,9 @@ function SellersForm({
       )}
       <div className="mvls-form-row">
         <div className="mvls-form-col">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">
+            <h3>Name</h3>
+          </label>
           <div className="mvls-form-input-group">
             <input
               type="text"
@@ -47,7 +49,9 @@ function SellersForm({
           </div>
         </div>
         <div className="mvls-form-col">
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="phone">
+            <h3>Phone</h3>
+          </label>
           <div className="mvls-form-input-group">
             <input
               type="number"
@@ -67,7 +71,9 @@ function SellersForm({
         </div>
 
         <div className="mvls-form-col">
-          <label htmlFor="stallno">Stallno</label>
+          <label htmlFor="stallno">
+            <h3>Stallno</h3>
+          </label>
           <div className="mvls-form-input-group">
             <input
               type="text"
